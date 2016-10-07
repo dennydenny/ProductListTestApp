@@ -13,13 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<ProductViewHolder> {
 
-    List<Product> products;
+    ArrayList<Product> products;
 
-    RecyclerViewAdapter(List<Product> products){
+    RecyclerViewAdapter(ArrayList<Product> products){
         this.products = products;
     }
 
