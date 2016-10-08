@@ -1,5 +1,6 @@
 package danielkhaliulin.productlisttestapp;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,12 +21,12 @@ public class DataBaseHelper extends SQLiteAssetHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // Возвращает список всех продуктов из БД.
     public ArrayList<Product> GetProductList ()
     {
         try {
             SQLiteDatabase db = getReadableDatabase();
             String query = "SELECT name, count, cost FROM products";
-
             Cursor c = db.rawQuery(query, null);
             ArrayList<Product> result = new ArrayList<Product>();
             while (c.moveToNext()) {
@@ -35,11 +36,29 @@ public class DataBaseHelper extends SQLiteAssetHelper {
 
                 result.add(new Product(_name, _count, _cost));
             }
+            c.close();
             return result;
         }
         catch (Exception e)
         {
             Log.e("GetProductList", e.getMessage());
+            throw e;
+        }
+    }
+
+    public void CreateProduct (Product product)
+    {
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("name", product.Name);
+            contentValues.put("count", product.Count);
+            contentValues.put("cost", product.Cost);
+            db.insert("products", null, contentValues);
+        }
+        catch (Exception e)
+        {
+            Log.e("CreateProduct", e.getMessage());
             throw e;
         }
     }
