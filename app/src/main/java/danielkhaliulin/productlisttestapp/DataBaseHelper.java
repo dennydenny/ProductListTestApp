@@ -46,6 +46,7 @@ public class DataBaseHelper extends SQLiteAssetHelper {
         }
     }
 
+    // Метод, осуществляющий создание переданного товара.
     public void CreateProduct (Product product)
     {
         try {
@@ -59,6 +60,22 @@ public class DataBaseHelper extends SQLiteAssetHelper {
         catch (Exception e)
         {
             Log.e("CreateProduct", e.getMessage());
+            throw e;
+        }
+    }
+
+    // Метод, осуществляющий удаление продукта.
+    public void DeleteProduct (Product product)
+    {
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            db.delete("products", "name = ? AND cost = ? AND count = ?",
+                    new String[] { product.Name,
+                            String.valueOf(product.Cost),
+                            String.valueOf(product.Count)});
+        }
+        catch (Exception e) {
+            Log.e("DeleteProduct", e.getMessage());
             throw e;
         }
     }

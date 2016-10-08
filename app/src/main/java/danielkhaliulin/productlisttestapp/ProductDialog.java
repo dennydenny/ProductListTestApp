@@ -8,16 +8,21 @@ import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.widget.Toast;
 
 
 public class ProductDialog extends DialogFragment implements OnClickListener {
 
+    int cost;
+    int count;
+    String name;
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         Bundle mArgs = getArguments();
-        int cost = mArgs.getInt("Cost");
-        int count = mArgs.getInt("Count");
-        String name = mArgs.getString("Name");
+        cost = mArgs.getInt("Cost");
+        count = mArgs.getInt("Count");
+        name = mArgs.getString("Name");
 
         AlertDialog.Builder adb = new AlertDialog.Builder(getActivity())
                 .setPositiveButton("Редактировать", this)
@@ -28,21 +33,22 @@ public class ProductDialog extends DialogFragment implements OnClickListener {
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        int i = 0;
         Log.i("ProductDialog", String.valueOf(which));
-        /*
         switch (which) {
-
             case Dialog.BUTTON_POSITIVE:
                 break;
             case Dialog.BUTTON_NEGATIVE:
-                i = R.string.no;
+                try {
+                    DataBaseHelper db = new DataBaseHelper(getActivity());
+                    db.DeleteProduct(new Product(name, count, cost));
+                    Toast.makeText(getActivity(), "Товар успешно удалён!", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
                 break;
-            case Dialog.BUTTON_NEUTRAL:
-                i = R.string.maybe;
+            default:
                 break;
-                */
         }
-
+    }
 }
 
