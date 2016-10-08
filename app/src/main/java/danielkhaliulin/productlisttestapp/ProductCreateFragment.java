@@ -58,7 +58,8 @@ public class ProductCreateFragment extends Fragment {
 
     private void setToolbar ()
     {
-        ((MainActivity_)getActivity()).getSupportActionBar().setTitle("Добавление товара");
+        ((MainActivity_)getActivity()).getSupportActionBar()
+                .setTitle(getResources().getString(R.string.ProductCreateFragment_title));
     }
 
     // TODO: Метод, активирующий кнопку создания товара только тогда, когда введены все поля.

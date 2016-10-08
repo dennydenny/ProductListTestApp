@@ -8,4 +8,7 @@
     <string name="product_count_create_hint">Количество</string>
     <string name="product_cost_create_hint">Цена</string>
     <string name="product_create_save_btn_label">Добавить</string>
+    <string name="product_edit_save_btn_label">Сохранить</string>
+    <string name="ProductEditFragment_title">Редактирование товара</string>
+    <string name="ProductCreateFragment_title">Добавление товара</string>
 </resources>

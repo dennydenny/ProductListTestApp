@@ -1,6 +1,7 @@
 package danielkhaliulin.productlisttestapp;
 
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -40,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
     void makeView ()
     {
         this.setToolbar();
-        this.openProductList();
+        fTrans = getSupportFragmentManager().beginTransaction();
+        fTrans.add(R.id.frame, productListFragment);
+        fTrans.commit();
     }
 
     private void setToolbar ()
@@ -49,20 +52,24 @@ public class MainActivity extends AppCompatActivity {
         setTitle("");
     }
 
+    // Метод, скрывающий плаваюущую кнопку.
     public void hideFab ()
     {
         fab.hide();
     }
 
+    // Метод, показывающий плаваюущую кнопку.
     public void showFab ()
     {
         fab.show();
     }
 
-    public void openProductList()
+    // Метод, для замены текущего открытого фрагмента.
+    public void replaceFragment (Fragment fragment)
     {
         fTrans = getSupportFragmentManager().beginTransaction();
-        fTrans.add(R.id.frame, productListFragment);
+        fTrans.replace(R.id.frame, fragment);
+        fTrans.addToBackStack(null);
         fTrans.commit();
     }
 }

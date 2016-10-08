@@ -67,6 +67,8 @@ public class DataBaseHelper extends SQLiteAssetHelper {
     // Метод, осуществляющий удаление продукта.
     public void DeleteProduct (Product product)
     {
+        if (product == null) throw new IllegalArgumentException();
+
         try {
             SQLiteDatabase db = getWritableDatabase();
             db.delete("products", "name = ? AND cost = ? AND count = ?",
@@ -78,5 +80,27 @@ public class DataBaseHelper extends SQLiteAssetHelper {
             Log.e("DeleteProduct", e.getMessage());
             throw e;
         }
+    }
+
+    // Метод, осуществляющий обновление данных товара (принимает товары, который был до редактирования и после редактирования).
+    public void UpdateProduct (Product oldProduct, Product newProduct)
+    {
+        if (oldProduct == null || newProduct == null) throw new IllegalArgumentException();
+        try {
+            SQLiteDatabase db = getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("name", newProduct.Name);
+            contentValues.put("count", newProduct.Count);
+            contentValues.put("cost", newProduct.Cost);
+            db.update("products", contentValues, "name = ? AND cost = ? AND count = ?",
+                    new String[]{oldProduct.Name,
+                            String.valueOf(oldProduct.Cost),
+                            String.valueOf(oldProduct.Count)});
+        }
+        catch (Exception e) {
+            Log.e("UpdateProduct", e.getMessage());
+            throw e;
+        }
+
     }
 }

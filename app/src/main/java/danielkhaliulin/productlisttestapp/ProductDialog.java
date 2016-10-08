@@ -16,10 +16,11 @@ public class ProductDialog extends DialogFragment implements OnClickListener {
     int cost;
     int count;
     String name;
+    Bundle mArgs;
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        Bundle mArgs = getArguments();
+        mArgs = getArguments();
         cost = mArgs.getInt("Cost");
         count = mArgs.getInt("Count");
         name = mArgs.getString("Name");
@@ -36,6 +37,10 @@ public class ProductDialog extends DialogFragment implements OnClickListener {
         Log.i("ProductDialog", String.valueOf(which));
         switch (which) {
             case Dialog.BUTTON_POSITIVE:
+                Bundle args = mArgs;
+                ProductEditFragment productEditFragment = new ProductEditFragment_();
+                productEditFragment.setArguments(args);
+                ((MainActivity_)getActivity()).replaceFragment(productEditFragment);
                 break;
             case Dialog.BUTTON_NEGATIVE:
                 try {

@@ -7,4 +7,8 @@
     <dimen name="product_create_text_size">20sp</dimen>
     <dimen name="product_create_left_margin">16dp</dimen>
     <dimen name="product_create_right_margin">16dp</dimen>
+    <dimen name="product_edit_label_size">20sp</dimen>
+    <dimen name="product_edit_text_size">20sp</dimen>
+    <dimen name="product_edit_left_margin">16dp</dimen>
+    <dimen name="product_edit_right_margin">16dp</dimen>
 </resources>
