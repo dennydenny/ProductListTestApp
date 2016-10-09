@@ -61,6 +61,7 @@ public class ProductEditFragment extends Fragment {
         setToolbar();
         currentProduct = getProductFromBundle();
         setProductValues(currentProduct);
+        ((MainActivity_)getActivity()).showFab();
     }
 
     private void setToolbar ()
